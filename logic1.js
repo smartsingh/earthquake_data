@@ -38,7 +38,7 @@ function createQuakes(earthquakeData) {
         return L.circleMarker(latlng, {
             radius: Math.pow(1.8, feature.properties.mag), //use powers of 1.8 so that circles are appropriately bigger at bigger magnitudes
             fillColor: colorGradient(feature.properties.mag),
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             stroke: 0
         });
     }
