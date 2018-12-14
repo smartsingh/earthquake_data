@@ -1,16 +1,13 @@
 // url for earthquakes
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson";
 
-// url for tectonic plates
-var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
-
-// Perform a GET request to the query URL
+// grabs earthquake points
 d3.json(queryUrl, function(data) {
-  // Once we get a response, send the data.features object to the createFeatures function
-  createFeatures(data.features);
+  // sends earthquakes to get built
+  createQuakes(data.features);
 });
 
-function createFeatures(earthquakeData) {
+function createQuakes(earthquakeData) {
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the earthquake
@@ -39,7 +36,7 @@ function createFeatures(earthquakeData) {
     onEachFeature: onEachFeature, 
     pointToLayer: function(feature, latlng){
         return L.circleMarker(latlng, {
-            radius: Math.pow(1.8, feature.properties.mag), //use powers of 10 for circles
+            radius: Math.pow(1.8, feature.properties.mag), //use powers of 1.8 so that circles are appropriately bigger at bigger magnitudes
             fillColor: colorGradient(feature.properties.mag),
             fillOpacity: 1,
             stroke: 0
@@ -89,9 +86,25 @@ function createMap(earthquakes) {
     "Pirate Map": pirateMap
   };
 
+  // url for tectonic plates
+  var platesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+
+  var plates = new L.LayerGroup()
+
+  // grabs plates
+  d3.json(platesUrl, function(data) {
+    L.geoJSON(data, {
+      style: {
+        fillOpacity:0
+      },
+      panes: "lines"
+    }).addTo(plates);
+  });
+
   // Create overlay object to hold our overlay layer
   var overlayMaps = {
-    Earthquakes: earthquakes
+    "Earthquakes": earthquakes,
+    "Tectonic Plates": plates
   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load
