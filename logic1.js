@@ -56,7 +56,7 @@ function createMap(earthquakes) {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     tileSize: 512,
     maxZoom: 18,
-    zoomOffset: -1,
+    zoomOffset: 1,
     id: "mapbox/streets-v11",
     accessToken: API_KEY
   });
@@ -119,7 +119,7 @@ function createMap(earthquakes) {
   // Create our map, giving it the streetmap and earthquakes layers to display on load
   var myMap = L.map("map", {
     center: [
-        0, -104.0059
+        30, -104.0059
     ],
     zoom: 4,
     layers: [streetMap, earthquakes]
