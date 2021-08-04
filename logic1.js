@@ -56,7 +56,7 @@ function createMap(earthquakes) {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     tileSize: 512,
     maxZoom: 18,
-    zoomOffset: 1,
+    zoomOffset: -1,
     id: "mapbox/streets-v11",
     accessToken: API_KEY
   });
@@ -121,7 +121,7 @@ function createMap(earthquakes) {
     center: [
         30, -104.0059
     ],
-    zoom: 4,
+    zoom: 3,
     layers: [streetMap, earthquakes]
   });
 
